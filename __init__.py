@@ -86,17 +86,26 @@ class WorkHelperSkill(MycroftSkill):
             self.speak_dialog("changes.done")
     """
 
-    @intent_handler(IntentBuilder("TurnOffScreens").require("turn.off.screens"))
-    def handle_night_intent(self, message):
-        turn_off_screens()
 
-    @intent_handler(IntentBuilder("Dock").require("turn.off.screens"))
+    @intent_handler(IntentBuilder("Dock").require("dock"))
     def handle_dock_intent(self, message):
         os.system("xrandr --output DP3-2 --crtc 2 --mode 1920x1200 --pos 0x0 --panning 1920x1200+0+0 --output DP3-1 --crtc 1  --mode 1920x1200 --pos 1920x0 --panning 1920x1200+1920+0 --output eDP1 --crtc 0 --mode 1280x720 --scale 0.5x0.5 --pos 3840x0 --panning 1280x720+3840+0")
     
-    @intent_handler(IntentBuilder("UnDock").require("turn.off.screens"))    
+    @intent_handler(IntentBuilder("UnDock").require("undock"))    
     def handle_undock_intent(self, message):
         os.system("xrandr --output DP3-2 --off --output DP3-1 --off --output eDP1 --mode 1920x1080 --scale 1x1")
+    
+    @intent_handler(IntentBuilder("suspend").require("suspend"))    
+    def handle_suspend_intent(self, message):
+        os.system("system suspend")
+
+    @intent_handler(IntentBuilder("lock").require("lock"))    
+    def handle_lock_intent(self, message):
+        os.system("~/lock.sh")
+
+
+
+
 
 
                   
